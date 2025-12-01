@@ -4,9 +4,26 @@ using UnityEngine;
 
 public class ControladorConAnimacion : MonoBehaviour
 {
+    [Header("Giro")]
+    public float velocidadGiro = 100f;
 
+    [Header("Salto")]
+    public float velocidadSalto = 50f;
+    public float gravedad = 10f;
+    public float velocidadPegarseSuelo = 2f;
+    private float velocidadVertical = 0f;
+
+    [Header("Control Aereo")]
+    public float velocidadEnAire = 3f;
+
+
+    public bool enSuelo = false;
+    private bool saltando = false;
     private Animator animator;
     private CharacterController characterController;
+    private float InputX, InputZ;
+    private float InputGiro;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +34,11 @@ public class ControladorConAnimacion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InputJugador(); 
+        InputJugador();
+        UpdateGiro();
+        UpdateSalto();
+        AplicarGravedad();
+        MovimientoAereo();
     }
 
     void BuscarComponentes()
@@ -28,8 +49,9 @@ public class ControladorConAnimacion : MonoBehaviour
 
     void InputJugador()
     {
-        float InputX = Input.GetAxis("Horizontal");
-        float InputZ = Input.GetAxis("Vertical");
+         InputX = Input.GetAxis("Horizontal");
+         InputZ = Input.GetAxis("Vertical");
+         InputGiro = Input.GetAxis("Mouse X");
 
         animator.SetFloat("InputX",InputX);
         animator.SetFloat("InputZ", InputZ);
@@ -38,8 +60,72 @@ public class ControladorConAnimacion : MonoBehaviour
     private void OnAnimatorMove()
     {
         Vector3 movimientoAnimator = animator.rootPosition - transform.position;
-        Vector3 movimientoTotal = movimientoAnimator;
+        Vector3 movimientoTotal = movimientoAnimator + velocidadVertical * Vector3.up * Time.deltaTime;
         characterController.Move(movimientoTotal);
 
+    }
+
+    void UpdateGiro()
+    {
+        transform.Rotate(0, InputGiro * velocidadGiro * Time.deltaTime,0);
+    }
+
+    void UpdateSalto()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetBool("Jumping", true);
+           
+            
+            Debug.LogWarning("Espacio pulsado");
+        }
+
+        if (saltando)
+        {
+            if(enSuelo)
+            {
+                animator.SetBool("Jumping", false);
+                Debug.LogWarning("SaltoFinalizado");
+                saltando =false;
+            }
+
+        }
+
+
+    }
+
+    void AplicarVelocidadSalto()
+    {
+        velocidadVertical = velocidadSalto;
+    }
+
+    void AplicarGravedad()
+    {
+        enSuelo = characterController.isGrounded;
+        
+
+        if (!enSuelo)
+        {
+            velocidadVertical -= gravedad * Time.deltaTime;
+        }
+        else
+        {
+            velocidadVertical = -velocidadPegarseSuelo;
+        }
+    }
+
+    void SaltandoTrue()
+    {
+        saltando = true;
+    }
+
+    void MovimientoAereo()
+    {
+        if(!enSuelo)
+        {
+            Vector3 inputTotal = transform.right * InputX + transform.forward * InputZ;
+            inputTotal.Normalize();
+            characterController.Move(inputTotal * velocidadEnAire * Time.deltaTime);
+        }    
     }
 }
