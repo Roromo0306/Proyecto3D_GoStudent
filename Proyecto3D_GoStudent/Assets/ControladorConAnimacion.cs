@@ -39,6 +39,7 @@ public class ControladorConAnimacion : MonoBehaviour
         UpdateSalto();
         AplicarGravedad();
         MovimientoAereo();
+        Baile();
     }
 
     void BuscarComponentes()
@@ -94,6 +95,20 @@ public class ControladorConAnimacion : MonoBehaviour
 
     }
 
+    void Baile()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            animator.SetBool("Dancing", true);
+        }
+
+        
+        if (Mathf.Abs(InputX) > 0.1f || Mathf.Abs(InputZ) > 0.1f)
+        {
+            if (animator.GetBool("Dancing"))
+                animator.SetBool("Dancing", false);
+        }
+    }
     void AplicarVelocidadSalto()
     {
         velocidadVertical = velocidadSalto;
