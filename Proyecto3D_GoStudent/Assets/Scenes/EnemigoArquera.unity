@@ -693,6 +693,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588814457}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &694716400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6626681655928935004, guid: 3cacf5ad754a03c4b8cc7a29071b0909,
+    type: 3}
+  m_PrefabInstance: {fileID: 928572151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &733502663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -799,6 +805,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2516043651666482861, guid: 3cacf5ad754a03c4b8cc7a29071b0909,
+        type: 3}
+      propertyPath: velocidadGiro
+      value: 83.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5817915659195877606, guid: 3cacf5ad754a03c4b8cc7a29071b0909,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -857,7 +868,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6626681655928935004, guid: 3cacf5ad754a03c4b8cc7a29071b0909,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1731687509}
   m_SourcePrefab: {fileID: 100100000, guid: 3cacf5ad754a03c4b8cc7a29071b0909, type: 3}
 --- !u!1 &1214520921
 GameObject:
@@ -1064,6 +1079,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 928572151}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1731687509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694716400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af83bb420334514b9a3545df116c378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rutaArchivos: C:\\Users\\powny\\Downloads
 --- !u!1 &1750126081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: aef202c0a7df9e0479e60a9f6d4e12fa,
@@ -1142,6 +1170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f003301fe4e7a4b9ea3570e0ef9458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Morir: 0
 --- !u!1 &1800120955
 GameObject:
   m_ObjectHideFlags: 0
