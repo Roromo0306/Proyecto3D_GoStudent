@@ -9,6 +9,8 @@ public class ObjetivoArquera : MonoBehaviour
     public Transform objetivo;
     public float radioPerseguir = 10f;
     public float radioHuir = 5f;
+    public float radioDisparo = 15f;
+    [HideInInspector] public bool puedeDisparar;
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -31,6 +33,14 @@ public class ObjetivoArquera : MonoBehaviour
         Vector3 orientacion = (objetivo.position - transform.position).normalized;
 
         transform.forward = orientacion;
+        if (radio<= radioDisparo)
+        {
+            puedeDisparar = true;
+        }
+        else
+        {
+            puedeDisparar = false;
+        }
 
         if (radio >= radioPerseguir)
         {
