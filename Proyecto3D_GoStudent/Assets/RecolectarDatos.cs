@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine.UI;
 
 
 public class RecolectarDatos : MonoBehaviour
 {
     public string rutaArchivos = "C:\\Users\\powny\\Downloads";
+    public GameObject panel;
+
+    private Slider[] sliders;
     private string rutaCompleta = "";
 
     private Vector3 ultimaPos;
